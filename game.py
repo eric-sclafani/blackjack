@@ -71,8 +71,6 @@ def start_hand(players, dealer):
             
          
     
-    
-   
 def main():
     
     dealer = pc.Dealer(name=random.choice(NAMES))
