@@ -14,14 +14,10 @@ class Player:
     
         # converts face cards into their value 10
         # important not to mutate self.hand
-        # really wanted to use a higher order func for some reason
         return sum(map(lambda x: 10 if isinstance(x, str) else x, self.hand))
-
-    def get_name(self):
-        return self.name
     
     def place_bet(self, n):
-       pass
+        pass
 
     def hit(self):
         pass
@@ -41,13 +37,29 @@ class Player:
     def win_hand(self):
         pass
     
-# player character 
-class PC(Player):
-    # player decides their own bet, moves, etc...
-    pass
 
-# non-player character               
-class NPC(Player):
+class PlayerCharacter(Player):
+    # player decides their own bet, moves, etc...
+    
+    def __init__(self, name, wallet=0):
+        super().__init__(name, wallet)
+        
+    def place_bet(self):
+        
+        while True:
+            try:
+                print(f"Current wallet amount: {self.wallet}")
+                bet = int(input("Bet: ").strip())
+                assert self.wallet >= bet > 0
+            except ValueError: 
+                print("Bet must be an integer: ", end="")
+            except AssertionError:
+                print("Bet must be greater than 0 and less than or equal to your wallet amount.")
+            else:
+                return bet
+
+              
+class NonPlayerCharacter(Player):
     # add rules that will decide what decisions the NPCs make
     pass
 
